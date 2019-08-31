@@ -9,6 +9,7 @@ const userSchema = new Schema({
     email: {type: String, required: true},
     password: {type: String, required: true},
     avatar: {type: String, required: false},
+    imageUrl: {type: String, required:false},
     timestamp: {type: Date, default: Date.now}
 
 });

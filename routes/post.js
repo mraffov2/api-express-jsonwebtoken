@@ -44,35 +44,10 @@ router.delete('/post/deleted/:id', verifyToken, async (req, res) => {
         if (!post){
             res.status(404).json({'message': 'No found'})
         }
-        await unlink(path.resolve('./backend/public/' + post.imageUrl));
+        await unlink(path.resolve('./backend/public/uploads/' + post.imageUrl));
         res.json({message: 'Post Deleted'});
     } catch(e){
         res.status(500).json({'message': 'Internal server error'})
-    } 
-});
-
-//Update Post
-router.put('/post/edit/:_id', verifyToken, async (req, res) => {
-    try {
-
-        if(!req.file){
-            res.status(400).json({'message': 'The file is required'});
-        } 
-
-        post = await Post.find({"_id":req.params._id}, (err, post) => {
-            if (err) {
-                res.status(404).json({'message': 'No found the post id'})
-            } 
-        });
-
-        //unlink(path.resolve('./backend/public/uploads' + post.imageUrl))
-
-        const imageUrl = '/' + req.file.filename;
-        const postUpdate = await Post.findByIdAndUpdate(req.params._id, {imageUrl});
-        res.status(201).json({'message': 'Post updated', 'post': postUpdate})
-
-    } catch(e){
-        res.status(500).json({'message': 'Internal server error', 'error': e})
     } 
 });
 
