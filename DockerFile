@@ -1,0 +1,12 @@
+FROM node:12
+FROM mongo:4
+
+WORKDIR /backenAppExpressJWT
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+CMD [ "node", "start" ]
