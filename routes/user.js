@@ -24,10 +24,10 @@ router.post('/register', async (req, res) => {
             expiresIn: 86400 // expires in 24 hours
         });
 
-        res.json({'message': 'User Saved', 'token': token});
+        res.status(201).json({'message': 'User Saved', 'token': token});
 
     }catch(e) {
-        res.status(404).json({'message': e});
+        res.status(501).json({'message': 'Server internal error'});
     }
 });
 
